@@ -1,5 +1,6 @@
 /***********************************************************************************
-  Simple Timer
+  SimpleCountdown
+  by Scott Kildall
 
   Uses the p5.timer.js class to show a 10-second countdown
 
@@ -10,7 +11,7 @@
   <script src="p5.timer.js"></script>
 ***********************************************************************************/
 
-
+// Make global 
 var simpleTimer;
 var waitForClick = true;
 var yTextPos = 60;
@@ -47,9 +48,9 @@ function draw() {
 function updateTimer() {
   if( simpleTimer.expired() ) {
   	fill(255,0,0);
-    frameRate(1);
     text( "BOOM", width/2, yTextPos );
     waitForClick = true;
+    frameRate(2);
   }
   else {
     fill(255);
@@ -59,5 +60,6 @@ function updateTimer() {
 
 function mousePressed() {
   waitForClick = false;
+  simpleTimer.start();
 }
 
