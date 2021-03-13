@@ -12,7 +12,7 @@
 // - Call expired() to check to see if timer is still active
 //------------------------------------------------------------------------------------------------------------------
 // --> Additions: 
-// new Timer(_duration) now creates but *DOES NOT START* the timer. call start() to start
+// new Timer(_duration) now creates a timer with an option to start immediately or not. default does not start. 
 // start() changed to start only if timer paused or expired (not currently running)
 // reset() covers the old functionality
 // pause() pauses the timer, allowing it to be restarted when needed. 
@@ -24,10 +24,10 @@
 
 class Timer {
     // Store the duration and start the timer
-    constructor( _duration ) {
+    constructor( _duration, start = false ) {
         this.startTime = millis();
         this.duration = _duration;
-        this.paused = true; 
+        this.paused = !start; 
         this.remainingDuration = _duration;
     
     }
