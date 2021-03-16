@@ -87,6 +87,11 @@ class Timer {
     // returns remaining time in milliseconds, zero if timer is done
     getRemainingTime() {
         if( this.expired() ){ return 0; }
+
+        if( this.paused ) {
+            return (this.remainingDuration);
+        }
+
         return  (this.startTime + this.remainingDuration) - millis();
     }  
 
