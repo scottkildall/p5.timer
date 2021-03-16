@@ -58,10 +58,13 @@ function draw() {
       }
 
       fill(220,120,0);
-      text("Press [e] to end timer", hMargin, 440 );
+      text("Press [a] to add 3 seconds to the timer", hMargin, 440 );
 
       fill(220,120,0);
-      text("Press [a] to add 3 seconds to the timer", hMargin, 480 );
+      text("Press [e] to end timer", hMargin, 480 );
+
+      fill(220,120,0);
+      text("Press [x] to reset", hMargin, 520 );      
     }
 
   	// wait for mouse === false
@@ -124,6 +127,9 @@ function keyPressed() {
     }
     else if( key === 'a' ) {
       simpleTimer.addTime(3000);
+    }
+    else if( key === 'x' ) {
+      simpleTimer.reset();
     }
   }
 
