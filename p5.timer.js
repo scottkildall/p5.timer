@@ -13,7 +13,7 @@
 //------------------------------------------------------------------------------------------------------------------
 // --> Additions: 
 // new Timer(_duration, start) now creates a timer with an option to start immediately or not. default does not start. 
-// reset() covers the old functionality
+// reset() covers the old start() functionality
 // pause() pauses the timer, allowing it to be restarted when needed. 
 // addTime(x) adds x millis to the remaining duration. it does not modify the original duration. 
 //  --> Can also use to subtract time w/ neg number
