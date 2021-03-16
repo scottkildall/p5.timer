@@ -36,6 +36,7 @@ class Timer {
     
     }
 
+// MAIN FUNCTIONS
     //starts the timer if it was expired or paused
     start() { 
         if ( this.expired() || this.paused ){
@@ -43,6 +44,11 @@ class Timer {
             if (this.expired()){ this.remainingDuration = this.duration; } //restarts
             if (this.paused){ this.paused = false; } //unpauses
         }
+    }
+
+    // returns true if the timer is expired, e.g. if millis() is greater than startTime + duration
+    expired() {
+        return (this.startTime + this.remainingDuration) < millis();
     }
 
     //restarts timer regardless of status
@@ -72,9 +78,10 @@ class Timer {
         this.remainingDuration = 0; 
     }
 
-    // returns true if the timer is expired, e.g. if millis() is greater than startTime + duration
-    expired() {
-        return (this.startTime + this.remainingDuration) < millis();
+// SIMPLE ACCESSORS
+    // accessor: returns true/false, indicating paused state
+    isPaused() {
+        return this.paused;
     }
 
     // returns remaining time in milliseconds, zero if timer is done

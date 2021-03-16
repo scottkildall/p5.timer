@@ -47,6 +47,14 @@ function draw() {
     text("Click mouse to begin progress bar", hMargin, 60 );
   }
   else {
+    if( simpleTimer.isPaused() ) {
+      fill(220,120,0);
+      text("Press [r] to resume", hMargin, 400 );
+    }
+    else {
+      fill(220,120,0);
+      text("Press [p] to pause", hMargin, 400 );
+    }
   	// wait for mouse === false
     drawProgressBar();
     drawTimerText();
@@ -92,4 +100,16 @@ function mousePressed() {
   else if( simpleTimer.expired() ) {
     bWaitForMouse = true;
   }
+}
+
+function keyPressed() {
+  if( simpleTimer.expired() === false ) {
+    if( key === 'p') {
+      simpleTimer.pause();
+    }
+    else if( key === 'r' ) {
+       simpleTimer.start();
+    }
+  }
+
 }
