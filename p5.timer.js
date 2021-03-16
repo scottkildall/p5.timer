@@ -12,12 +12,16 @@
 // - Call expired() to check to see if timer is still active
 //------------------------------------------------------------------------------------------------------------------
 // --> Additions: 
-// new Timer(_duration) now creates a timer with an option to start immediately or not. default does not start. 
-// start() changed to start only if timer paused or expired (not currently running)
+// new Timer(_duration, start) now creates a timer with an option to start immediately or not. default does not start. 
 // reset() covers the old functionality
 // pause() pauses the timer, allowing it to be restarted when needed. 
 // addTime(x) adds x millis to the remaining duration. it does not modify the original duration. 
 //  --> Can also use to subtract time w/ neg number
+// endTimer() forcibly ends the timer (will return true when expired() called); 
+//
+// --> Modifications:
+// start() -- now starts ONLY IF timer not currently running
+// --> starts if paused by pause() or timer expired
 //------------------------------------------------------------------------------------------------------------------
 //   Constructor: requires a timer duration, this can always be changed with setTimer()
 *********************************************************************************************************************/
@@ -34,9 +38,9 @@ class Timer {
 
     //starts the timer if it was expired or paused
     start() { 
-        if (expired() || this.paused){
+        if ( this.expired() || this.paused ){
             this.startTime = millis(); //restarts counting millis
-            if (expired()){ this.remainingDuration = this.duration; } //restarts
+            if (this.expired()){ this.remainingDuration = this.duration; } //restarts
             if (this.paused){ this.paused = false; } //unpauses
         }
     }
@@ -48,7 +52,7 @@ class Timer {
 
     //pauses the timer 
     pause(){
-        this.remainingDuration = getRemainingTime(); 
+        this.remainingDuration = this.getRemainingTime(); 
         this.paused = true; 
     }
     
@@ -88,8 +92,6 @@ class Timer {
 
     // returns elapsed % of timer, 0.0 through 1.0
     getPercentageElapsed() {
-        if( this.duration === 0 ) { return 0.0; } // avoid div by zero error
-        if( this.expired() ) {return 1.0;}
-        return 1.0 - (this.getRemainingTime()/this.duration);
+        return 1.0 - this.getPercentageRemaining(); //refactor to remove duplication
     }	 	
 }
