@@ -47,14 +47,23 @@ function draw() {
     text("Click mouse to begin progress bar", hMargin, 60 );
   }
   else {
-    if( simpleTimer.isPaused() ) {
+    if( simpleTimer.expired() === false ) {
+      if( simpleTimer.isPaused() ) {
+        fill(220,120,0);
+        text("Press [r] to resume", hMargin, 400 );
+      }
+      else {
+        fill(220,120,0);
+        text("Press [p] to pause", hMargin, 400 );
+      }
+
       fill(220,120,0);
-      text("Press [r] to resume", hMargin, 400 );
-    }
-    else {
+      text("Press [e] to end timer", hMargin, 440 );
+
       fill(220,120,0);
-      text("Press [p] to pause", hMargin, 400 );
+      text("Press [a] to add 3 seconds to the timer", hMargin, 480 );
     }
+
   	// wait for mouse === false
     drawProgressBar();
     drawTimerText();
@@ -109,6 +118,12 @@ function keyPressed() {
     }
     else if( key === 'r' ) {
        simpleTimer.start();
+    }
+    else if( key === 'e' ) {
+      simpleTimer.endTimer();
+    }
+    else if( key === 'a' ) {
+      simpleTimer.addTime(3000);
     }
   }
 

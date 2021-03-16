@@ -1,29 +1,28 @@
 /*******************************************************************************************************************
 //
 //  Class: Timer
+//  for P5.js
 //
 //  Written by Scott Kildall
 //  Modified by Alina Xia
-//	for P5.js
-//
+//	
 //------------------------------------------------------------------------------------------------------------------
 // - Very simple but incredibly useful timer class
 // - Call start() whenever it expires to reset the time
 // - Call expired() to check to see if timer is still active
 //------------------------------------------------------------------------------------------------------------------
-// --> Additions: 
+//   Constructor: requires a timer duration, this can always be changed with setTimer()
+//------------------------------------------------------------------------------------------------------------------
+// --> Additions + Mods by Alina
 // new Timer(_duration, start) now creates a timer with an option to start immediately or not. default does not start. 
 // reset() covers the old start() functionality
 // pause() pauses the timer, allowing it to be restarted when needed. 
 // addTime(x) adds x millis to the remaining duration. it does not modify the original duration. 
 //  --> Can also use to subtract time w/ neg number
 // endTimer() forcibly ends the timer (will return true when expired() called); 
-//
 // --> Modifications:
 // start() -- now starts ONLY IF timer not currently running
 // --> starts if paused by pause() or timer expired
-//------------------------------------------------------------------------------------------------------------------
-//   Constructor: requires a timer duration, this can always be changed with setTimer()
 *********************************************************************************************************************/
 
 class Timer {
@@ -33,7 +32,6 @@ class Timer {
         this.duration = _duration;
         this.paused = !start; 
         this.remainingDuration = _duration;
-    
     }
 
 // MAIN FUNCTIONS
@@ -51,20 +49,20 @@ class Timer {
         return (this.startTime + this.remainingDuration) < millis();
     }
 
-    //restarts timer regardless of status
+    // restarts timer regardless of status
     reset(){
         this.startTime = millis(); 
     }
 
-    //pauses the timer 
+    // pauses the timer 
     pause(){
         this.remainingDuration = this.getRemainingTime(); 
         this.paused = true; 
     }
     
-    //adds x millis to the remaining duration. 
+    // adds x millis to the remaining duration. 
     addTime(x){
-        this.remainingDuration + x; 
+        this.remainingDuration = this.remainingDuration + x; 
     }
 
     // set the duration, doesn't restart the timer
@@ -86,12 +84,8 @@ class Timer {
 
     // returns remaining time in milliseconds, zero if timer is done
     getRemainingTime() {
-        if( this.expired() ){ return 0; }
-
-        if( this.paused ) {
-            return (this.remainingDuration);
-        }
-
+        if( this.expired() ) { return 0; }
+        if( this.paused ) { return (this.remainingDuration); }
         return  (this.startTime + this.remainingDuration) - millis();
     }  
 
