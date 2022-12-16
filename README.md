@@ -69,7 +69,7 @@ Forces an expired() to the timer by setting remaining duration to zero.
 ###expired();
 Returns true if the timer is expired, false if it is still running. This code will check for an expired timer, send an alert and then re-start the timer.
 
-`if( simpleTimer.expired() {`
+`if( simpleTimer.expired() ){`
 
    `alert("done");`
    
